@@ -38,3 +38,20 @@ export async function getGroupsFromLambda(accessToken) {
 
   return await res.json(); // expects { groups: [...] }
 }
+
+export async function getGroupInfoFromLambda(accessToken, groupId) {
+  const res = await fetch(
+    `${lambdaBaseUrl}/splitwise/get_group/${groupId}`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: new URLSearchParams({
+        access_token: accessToken,
+      }),
+    }
+  );
+
+  return await res.json(); // expects { groups: [...] }
+}
